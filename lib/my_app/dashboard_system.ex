@@ -50,10 +50,9 @@ defmodule MyApp.DashboardSystem do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_dashboard(%User{} = user,attrs \\ %{}) do
+  def create_dashboard(attrs \\ %{}) do
     %Dashboard{}
     |> Dashboard.changeset(attrs)
-    |> Ecto.Changeset.put_change(:user_id, user.id)
     |> Repo.insert()
   end
 

@@ -16,7 +16,7 @@ defmodule MyApp.DashboardSystem.Dashboard do
   @doc false
   def changeset(dashboard, attrs) do
     dashboard
-    |> cast(attrs, [:title])
+    |> cast(attrs, [:title, :user_id])
     |> validate_required([:title])
     |> unique_constraint(:user_id)
   end

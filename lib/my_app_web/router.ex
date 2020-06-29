@@ -11,18 +11,19 @@ defmodule MyAppWeb.Router do
   end
 
   scope "/", MyAppWeb do
-    resources "/api/users/", UserController, only: [:create]
+
   end
 
   scope "/api", MyAppWeb do
     pipe_through :api
     post "/users/sign_in", UserController, :sign_in
+    resources "/users", UserController, except: [:new, :edit]
+
 
   end
 
   scope "/api", MyAppWeb do
     pipe_through [:api, :api_auth]
-    resources "/users", UserController, except: [:create, :new, :edit]
     resources "/dashboards", DashboardController, except: [:new, :edit]
     resources "/links", LinkController, except: [:new, :edit]
     resources "/notes", NoteController, except: [:new, :edit]

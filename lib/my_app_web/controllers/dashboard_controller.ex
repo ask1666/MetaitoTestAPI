@@ -6,6 +6,8 @@ defmodule MyAppWeb.DashboardController do
 
   action_fallback MyAppWeb.FallbackController
 
+
+
   def index(conn, _params) do
     dashboards = DashboardSystem.list_dashboards()
     render(conn, "index.json", dashboards: dashboards)
