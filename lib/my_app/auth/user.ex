@@ -9,7 +9,7 @@ defmodule MyApp.Auth.User do
     field :is_active, :boolean, default: false
     field :password, :string, virtual: true
     field :password_hash, :string
-
+    has_many :dashboard, MyApp.DashboardSystem.Dashboard
     timestamps()
   end
 
