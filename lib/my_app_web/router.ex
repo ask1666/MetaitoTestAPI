@@ -30,16 +30,15 @@ defmodule MyAppWeb.Router do
   end
 
   defp ensure_authenticated(conn, _opts) do
-    current_user_id = get_session(conn, :current_user_id)
-
-    if current_user_id do
-      conn
-    else
-      conn
-      |> put_status(:unauthorized)
-      |> put_view(MyAppWeb.ErrorView)
-      |> render("401.json", message: "unauthenticated user")
-      |> halt()
+    case get_session(conn, :current_user_id) do
+      nil ->
+        conn
+        |> put_status(:unauthorized)
+        |> put_view(MyAppWeb.ErrorView)
+        |> render("401.json", message: "unauthenticated user")
+        |> halt()
+      current_user_id ->
+        assign(conn, :current_user, MyApp.Auth.get_user!(current_user_id))
     end
   end
 

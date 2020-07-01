@@ -5,7 +5,6 @@ defmodule MyApp.Auth do
 
   import Ecto.Query, warn: false
   alias MyApp.Repo
-
   alias MyApp.Auth.User
 
   @doc """
@@ -18,7 +17,10 @@ defmodule MyApp.Auth do
 
   """
   def list_users do
-    Repo.all(User)
+    User
+    |> Repo.all()
+    |> Repo.preload(:dashboard)
+
   end
 
   @doc """

@@ -14,7 +14,7 @@ defmodule MyAppWeb.DashboardController do
   end
 
   def create(conn, %{"dashboard" => dashboard_params}) do
-    with {:ok, %Dashboard{} = dashboard} <- DashboardSystem.create_dashboard(dashboard_params) do
+    with {:ok, %Dashboard{} = dashboard} <- DashboardSystem.create_dashboard(conn.assigns.current_user, dashboard_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.dashboard_path(conn, :show, dashboard))

@@ -2,6 +2,7 @@ defmodule MyApp.DashboardSystem.Dashboard do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Jason.Encoder, only: [:title, :id]}
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "dashboards" do
@@ -16,7 +17,7 @@ defmodule MyApp.DashboardSystem.Dashboard do
   @doc false
   def changeset(dashboard, attrs) do
     dashboard
-    |> cast(attrs, [:title, :user_id])
+    |> cast(attrs, [:title])
     |> validate_required([:title])
     |> unique_constraint(:user_id)
   end
