@@ -18,5 +18,6 @@ defmodule MyApp.DashboardSystem.Link do
     link
     |> cast(attrs, [:title, :url])
     |> validate_required([:title, :url])
+    |> unique_constraint(:title)
   end
 end

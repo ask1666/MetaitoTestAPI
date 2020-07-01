@@ -18,7 +18,7 @@ defmodule MyAppWeb.DashboardController do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.dashboard_path(conn, :show, dashboard))
-      |> render("show.json", dashboard: dashboard)
+      |> send_resp(200, dashboard.id)
     end
   end
 

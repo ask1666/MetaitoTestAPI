@@ -20,5 +20,6 @@ defmodule MyApp.DashboardSystem.Note do
     note
     |> cast(attrs, [:title, :text, :markdown, :html_saved])
     |> validate_required([:title, :text, :markdown, :html_saved])
+    |> unique_constraint(:title)
   end
 end
