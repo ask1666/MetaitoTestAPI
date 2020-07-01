@@ -11,8 +11,8 @@ defmodule MyAppWeb.LinkController do
     render(conn, "index.json", links: links)
   end
 
-  def create(conn, %{"link" => link_params}) do
-    with {:ok, %Link{} = link} <- DashboardSystem.create_link(link_params) do
+  def create(conn, %{"dashboard_id" => dashboard_id, "link" => link_params}) do
+    with {:ok, %Link{} = link} <- DashboardSystem.create_link(dashboard_id, link_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.link_path(conn, :show, link))
@@ -37,7 +37,7 @@ defmodule MyAppWeb.LinkController do
     link = DashboardSystem.get_link!(id)
 
     with {:ok, %Link{}} <- DashboardSystem.delete_link(link) do
-      send_resp(conn, :no_content, "")
+      render(conn, "show.json", link: link)
     end
   end
 end

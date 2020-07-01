@@ -21,6 +21,8 @@ defmodule MyApp.DashboardSystem do
   def list_dashboards do
     Dashboard
     |> Repo.all()
+    |> Repo.preload(:link)
+    |> Repo.preload(:note)
   end
 
   @doc """
@@ -148,9 +150,10 @@ defmodule MyApp.DashboardSystem do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_note(attrs \\ %{}) do
+  def create_note(dashboard_id, attrs \\ %{}) do
     %Note{}
     |> Note.changeset(attrs)
+    |> Ecto.Changeset.put_change(:dashboard_id, dashboard_id)
     |> Repo.insert()
   end
 
@@ -244,9 +247,10 @@ defmodule MyApp.DashboardSystem do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_link(attrs \\ %{}) do
+  def create_link(dashboard_id, attrs \\ %{}) do
     %Link{}
     |> Link.changeset(attrs)
+    |> Ecto.Changeset.put_change(:dashboard_id, dashboard_id)
     |> Repo.insert()
   end
 

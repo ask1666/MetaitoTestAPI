@@ -2,6 +2,7 @@ defmodule MyApp.DashboardSystem.Link do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Jason.Encoder, only: [:id, :title, :url]}
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "links" do

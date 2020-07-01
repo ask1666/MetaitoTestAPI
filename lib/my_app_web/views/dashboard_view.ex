@@ -13,6 +13,8 @@ defmodule MyAppWeb.DashboardView do
   def render("dashboard.json", %{dashboard: dashboard}) do
     %{id: dashboard.id,
       user_id: dashboard.user_id,
+      notes: dashboard.note,
+      links: dashboard.link,
       title: dashboard.title}
   end
 end
