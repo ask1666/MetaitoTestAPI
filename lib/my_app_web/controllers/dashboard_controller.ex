@@ -13,6 +13,7 @@ defmodule MyAppWeb.DashboardController do
     render(conn, "index.json", dashboards: dashboards)
   end
 
+  @spec create(atom | %{assigns: atom | %{current_user: MyApp.Auth.User.t()}}, map) :: any
   def create(conn, %{"dashboard" => dashboard_params}) do
     with {:ok, %Dashboard{} = dashboard} <- DashboardSystem.create_dashboard(conn.assigns.current_user, dashboard_params) do
       conn
@@ -27,6 +28,7 @@ defmodule MyAppWeb.DashboardController do
     render(conn, "show.json", dashboard: dashboard)
   end
 
+  @spec update(any, map) :: any
   def update(conn, %{"id" => id, "dashboard" => dashboard_params}) do
     dashboard = DashboardSystem.get_dashboard!(id)
 

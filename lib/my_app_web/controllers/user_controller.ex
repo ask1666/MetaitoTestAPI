@@ -11,6 +11,7 @@ defmodule MyAppWeb.UserController do
     render(conn, "index.json", users: users)
   end
 
+  @spec create(any, map) :: any
   def create(conn, %{"user" => user_params}) do
     with {:ok, %User{} = user} <- Auth.create_user(user_params) do
       conn
@@ -41,6 +42,7 @@ defmodule MyAppWeb.UserController do
     end
   end
 
+  @spec sign_in(Plug.Conn.t(), map) :: Plug.Conn.t()
   def sign_in(conn, %{"email" => email, "password" => password}) do
     case MyApp.Auth.authenticate_user(email, password) do
       {:ok, user} ->
