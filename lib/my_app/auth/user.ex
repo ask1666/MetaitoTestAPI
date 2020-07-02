@@ -7,7 +7,6 @@ defmodule MyApp.Auth.User do
   @foreign_key_type :binary_id
   schema "users" do
     field :email, :string
-    field :is_active, :boolean, default: false
     field :password, :string, virtual: true
     field :password_hash, :string
     has_many :dashboard, MyApp.DashboardSystem.Dashboard
@@ -17,8 +16,8 @@ defmodule MyApp.Auth.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :is_active, :password])
-    |> validate_required([:email, :is_active, :password])
+    |> cast(attrs, [:email, :password])
+    |> validate_required([:email, :password])
     |> unique_constraint(:email)
     |> put_password_hash()
   end
