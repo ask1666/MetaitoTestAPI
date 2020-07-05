@@ -12,7 +12,7 @@ defmodule MyAppWeb.UserController do
   end
 
   @spec create(any, map) :: any
-  def create(conn, %{"user" => user_params}) do
+  def create(conn, user_params) do
     with {:ok, %User{} = user} <- Auth.create_user(user_params) do
       conn
       |> put_status(:created)
@@ -21,8 +21,8 @@ defmodule MyAppWeb.UserController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    user = Auth.get_user!(id)
+  def show(conn, _params) do
+    user = Auth.get_user!(get_session(conn, :current_user_id))
     render(conn, "show.json", user: user)
   end
 

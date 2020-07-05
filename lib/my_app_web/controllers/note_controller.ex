@@ -11,8 +11,8 @@ defmodule MyAppWeb.NoteController do
     render(conn, "index.json", notes: notes)
   end
 
-  def create(conn, %{"note" => note_params}) do
-    with {:ok, %Note{} = note} <- DashboardSystem.create_note(note_params) do
+  def create(conn, %{"dashboard_id" => dashboard_id, "note" => note_params}) do
+    with {:ok, %Note{} = note} <- DashboardSystem.create_note(dashboard_id,note_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.note_path(conn, :show, note))

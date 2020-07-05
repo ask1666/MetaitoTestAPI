@@ -34,6 +34,7 @@ defmodule MyApp.MixProject do
   defp deps do
     [
       {:pbkdf2_elixir, "~> 1.2.0"},
+      {:cors_plug, "~> 1.5"},
       {:phoenix, "~> 1.5.3"},
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},

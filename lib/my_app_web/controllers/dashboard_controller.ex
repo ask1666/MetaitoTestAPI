@@ -14,7 +14,7 @@ defmodule MyAppWeb.DashboardController do
   end
 
   @spec create(atom | %{assigns: atom | %{current_user: MyApp.Auth.User.t()}}, map) :: any
-  def create(conn, %{"dashboard" => dashboard_params}) do
+  def create(conn, dashboard_params) do
     with {:ok, %Dashboard{} = dashboard} <- DashboardSystem.create_dashboard(conn.assigns.current_user, dashboard_params) do
       conn
       |> put_status(:created)

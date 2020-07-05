@@ -2,6 +2,7 @@ defmodule MyAppWeb.Router do
   use MyAppWeb, :router
 
   pipeline :api do
+    plug CORSPlug, origin: ["http://localhost:8080"]
     plug :accepts, ["json"]
     plug :fetch_session
   end
@@ -17,16 +18,25 @@ defmodule MyAppWeb.Router do
   scope "/api", MyAppWeb do
     pipe_through :api
     post "/users/sign_in", UserController, :sign_in
-    resources "/users", UserController, except: [:new, :edit]
+    resources "/users", UserController, except: [:show, :new, :edit]
+
+    options "/users", UserController, :options
+    options "/users/sign_in", UserController, :options
 
 
   end
 
   scope "/api", MyAppWeb do
     pipe_through [:api, :api_auth]
+    get "/users/show_user", UserController, :show
     resources "/dashboards", DashboardController, except: [:new, :edit]
     resources "/links", LinkController, except: [:new, :edit]
     resources "/notes", NoteController, except: [:new, :edit]
+
+    options "/dashboards", UserController, :options
+    options "/links", UserController, :options
+    options "/notes", UserController, :options
+
   end
 
   defp ensure_authenticated(conn, _opts) do
