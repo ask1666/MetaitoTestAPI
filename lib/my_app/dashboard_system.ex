@@ -39,7 +39,12 @@ defmodule MyApp.DashboardSystem do
       ** (Ecto.NoResultsError)
 
   """
-  def get_dashboard!(id), do: Repo.get!(Dashboard, id)
+  def get_dashboard!(id) do
+    Dashboard
+    |> Repo.get!(id)
+    |> Repo.preload(:link)
+    |> Repo.preload(:note)
+  end
 
   @doc """
   Creates a dashboard.

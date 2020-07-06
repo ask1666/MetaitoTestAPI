@@ -29,9 +29,12 @@ defmodule MyAppWeb.Router do
   scope "/api", MyAppWeb do
     pipe_through [:api, :api_auth]
     get "/users/show_user", UserController, :show
+    get "/getDashboard/", DashboardController, :show
+    delete "/dashboards", DashboardController, :delete
     resources "/dashboards", DashboardController, except: [:new, :edit]
     resources "/links", LinkController, except: [:new, :edit]
     resources "/notes", NoteController, except: [:new, :edit]
+
 
     options "/dashboards", UserController, :options
     options "/links", UserController, :options

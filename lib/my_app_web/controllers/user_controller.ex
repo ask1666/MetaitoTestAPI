@@ -16,8 +16,7 @@ defmodule MyAppWeb.UserController do
     with {:ok, %User{} = user} <- Auth.create_user(user_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", Routes.user_path(conn, :show, user))
-      |> json("created")
+      |> send_resp(200, user.id)
     end
   end
 
