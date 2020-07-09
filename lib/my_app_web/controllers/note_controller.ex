@@ -15,15 +15,15 @@ defmodule MyAppWeb.NoteController do
     with {:ok, %Note{} = note} <- DashboardSystem.create_note(dashboard_id,note_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", Routes.note_path(conn, :show, note))
-      |> render("show.json", note: note)
+      |> send_resp(200, note.id)
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, id) do
     note = DashboardSystem.get_note!(id)
     render(conn, "show.json", note: note)
   end
+
 
   def update(conn, %{"id" => id, "note" => note_params}) do
     note = DashboardSystem.get_note!(id)

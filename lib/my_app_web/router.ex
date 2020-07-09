@@ -30,6 +30,8 @@ defmodule MyAppWeb.Router do
     pipe_through [:api, :api_auth]
     get "/users/show_user", UserController, :show
     get "/getDashboard/", DashboardController, :show
+    put "/notes/", NoteController, :update
+    delete "/notes/", NoteController, :delete
     delete "/dashboards", DashboardController, :delete
     resources "/dashboards", DashboardController, except: [:new, :edit]
     resources "/links", LinkController, except: [:new, :edit]

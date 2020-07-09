@@ -141,7 +141,12 @@ defmodule MyApp.DashboardSystem do
       ** (Ecto.NoResultsError)
 
   """
-  def get_note!(id), do: Repo.get!(Note, id)
+  def get_note!(id) do
+    Note
+    |> Repo.get!(id)
+    |> Repo.preload(:dashboard)
+  end
+
 
   @doc """
   Creates a note.
