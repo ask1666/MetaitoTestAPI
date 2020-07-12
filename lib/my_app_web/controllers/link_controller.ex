@@ -37,7 +37,7 @@ defmodule MyAppWeb.LinkController do
     link = DashboardSystem.get_link!(id)
 
     with {:ok, %Link{}} <- DashboardSystem.delete_link(link) do
-      render(conn, "show.json", link: link)
+      send_resp(conn, :no_content, "")
     end
   end
 end

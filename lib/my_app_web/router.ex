@@ -33,6 +33,7 @@ defmodule MyAppWeb.Router do
     put "/notes/", NoteController, :update
     delete "/notes/", NoteController, :delete
     delete "/dashboards", DashboardController, :delete
+    delete "/links/", LinkController, :delete
     resources "/dashboards", DashboardController, except: [:new, :edit]
     resources "/links", LinkController, except: [:new, :edit]
     resources "/notes", NoteController, except: [:new, :edit]
