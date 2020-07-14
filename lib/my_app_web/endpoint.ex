@@ -6,6 +6,7 @@ defmodule MyAppWeb.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
+    max_age: 24*60*60*1,
     key: "_my_app_key",
     signing_salt: "gQNGSwH5"
   ]
