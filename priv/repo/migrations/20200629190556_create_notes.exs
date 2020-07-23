@@ -13,6 +13,5 @@ defmodule MyApp.Repo.Migrations.CreateNotes do
       timestamps()
     end
 
-    create unique_index(:notes, [:title])
   end
 end

@@ -11,6 +11,5 @@ defmodule MyApp.Repo.Migrations.CreateLinks do
       timestamps()
     end
 
-    create unique_index(:links, [:title])
   end
 end

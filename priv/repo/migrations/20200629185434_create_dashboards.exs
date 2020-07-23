@@ -10,6 +10,5 @@ defmodule MyApp.Repo.Migrations.CreateDashboards do
       timestamps()
     end
 
-    create unique_index(:dashboards, [:title])
   end
 end
